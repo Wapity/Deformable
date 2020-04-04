@@ -3,6 +3,7 @@ import argparse
 
 from encoder import Encoder
 from decoder import Decoder, LinDecoder, DefDecoder
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch_size',
                     help='batch size',

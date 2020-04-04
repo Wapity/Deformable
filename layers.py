@@ -4,8 +4,7 @@ import torch.nn as nn
 activations = {'relu': nn.ReLU(),
                'tanh': nn.Tanh(),
                'leaky_relu': nn.LeakyReLU(negative_slope=0.01),
-               'sigmoid': nn.Sigmoid(),
-               'linear': nn.Linear()}
+               'sigmoid': nn.Sigmoid()}
 
 
 def GlobalPooling(final=(1, 1, 1)):
@@ -16,13 +15,13 @@ class Conv3D(nn.Module):
     def __init__(self,
                  in_channels,
                  out_channels,
-                 kernel_size,
-                 stride,
+                 kernel_size=3,
+                 stride=1,
                  padding=1,
                  dilation=1,
                  instance_norm=True,
                  act='leaky_relu'):
-        super(DilatedConv3D, self).__init__()
+        super(Conv3D, self).__init__()
         self._layer = nn.Conv3d(in_channels, out_channels,
                                 kernel_size, stride, padding, dilation)
         if instance_norm:
@@ -33,9 +32,11 @@ class Conv3D(nn.Module):
         self._act = activations[act]
 
     def forward(self, x):
+        print('input', x.shape)
         x = self._layer(x)
         x = self._norm(x)
         x = self._act(x)
+        print('output', x.shape)
         return x
 
 
