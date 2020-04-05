@@ -29,4 +29,4 @@ class DefDecoder(nn.Module):
         self._main = nn.Sequential(*modules)
 
     def forward(self, x):
-        return self._main(x)
+        return self._main(x) / 2

@@ -3,12 +3,14 @@ import argparse
 
 from encoder import Encoder
 from decoder import Decoder, LinDecoder, DefDecoder
+device = torch.device(
+    "cuda") if torch.cuda.is_available() else torch.device("cpu")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch_size',
                     help='batch size',
                     type=int,
-                    default=10)
+                    default=1)
 parser.add_argument('--optimizer',
                     help='optimizer type : ',
                     type=str,
