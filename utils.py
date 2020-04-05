@@ -21,7 +21,7 @@ def dataset(random=RANDOM, batch_size):
 
 
 def build_affine_grid(size, device):
-    B, _, H, W, D = size
+    B, _, H, W, D = sizes
     x, y, z = [torch.flatten(t) for t in [torch.meshgrid(
         *[torch.linspace(-1, 1, steps=s) for s in [H, W, D]])]]
     ones = torch.ones_like(x)
