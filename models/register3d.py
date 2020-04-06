@@ -1,7 +1,6 @@
 import torch.nn as nn
 from .layers import Transformer3d
-from .decoder import DefDecoder, LinDecoder
-from .encoder import Encoder
+from .autoencoder import *
 from utils.utils import affine_grid_3d, gradient_grid_3d, build_affine_grid
 
 
@@ -11,7 +10,7 @@ class Register3d(nn.Module):
         super(Register3d, self).__init__()
         self.encoder = Encoder()
         self.def_decoder = DefDecoder()
-        self.a_decoder = LinDecoder
+        self.a_decoder = LinDecoder()
         self.transformer = Transformer3d()
         self.size = size
         self.linear = linear
