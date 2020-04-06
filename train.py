@@ -1,8 +1,7 @@
 import torch
 import argparse
 
-from models.encoder import Encoder
-from models.decoder import Decoder, LinDecoder, DefDecoder
+from autoencoder import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch_size',
