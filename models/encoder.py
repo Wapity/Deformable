@@ -7,11 +7,11 @@ class Encoder(nn.Module):
 
     def __init__(self, in_channels):
         super(Encoder, self).__init__()
-        self._dilated_1 = layers.Conv3D(in_channels, 32, 3, 1, dilation=1)
-        self._dilated_2 = layers.Conv3D(32, 64, 3, 1, dilation=1)
-        self._dilated_3 = layers.Conv3D(64, 128, 3, 1, dilation=2)
-        self._dilated_4 = layers.Conv3D(128, 32, 3, 1, dilation=3)
-        self._dilated_5 = layers.Conv3D(32, 32, 3, 1, dilation=5)
+        self._dilated_1 = Conv3D(in_channels, 32, 3, 1, dilation=1)
+        self._dilated_2 = Conv3D(32, 64, 3, 1, dilation=1)
+        self._dilated_3 = Conv3D(64, 128, 3, 1, dilation=2)
+        self._dilated_4 = Conv3D(128, 32, 3, 1, dilation=3)
+        self._dilated_5 = Conv3D(32, 32, 3, 1, dilation=5)
 
     def forward(self, x_0, x_1):
         x = torch.stack([x_0, x_1], 1)
