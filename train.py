@@ -4,9 +4,6 @@ import argparse
 from models.encoder import Encoder
 from models.decoder import Decoder, LinDecoder, DefDecoder
 
-device = torch.device(
-    "cuda") if torch.cuda.is_available() else torch.device("cpu")
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch_size',
                     help='batch size',
@@ -37,7 +34,15 @@ parser.add_argument('--beta',
                     help='regularization weight for deformable loss',
                     type=float,
                     default=1e-6)
+parser.add_argument('--train',
+                    help='Train or Eval',
+                    type=bool,
+                    default=True)
 
-
+args = parser.parse_args()
 trainer = Trainer(args, Encoder(), LinDecoder(), DefDecoder())
-trainer.train()
+
+if args.train:
+    trainer.train()
+else:
+    trainer.eval()

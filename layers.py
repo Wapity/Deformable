@@ -8,10 +8,6 @@ activations = {'relu': nn.ReLU(),
                'sigmoid': nn.Sigmoid()}
 
 
-def GlobalPooling(final=(1, 1, 1)):
-    return nn.AdaptiveAvgPool3d(final)
-
-
 class Conv3D(nn.Module):
     def __init__(self,
                  in_channels,

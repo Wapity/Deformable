@@ -6,7 +6,7 @@ import layers
 class LinDecoder(nn.Module):
     def __init__(self, in_channels):
         super(LinDecoder, self).__init__()
-        modules = [layers.GlobalPooling(),
+        modules = [nn.AdaptiveAvgPool3d((None, None, None, 1, 1)),
                    layers.Conv3D(in_channels, 12, instance_norm=False)]
         self._main = nn.Sequential(*modules)
 

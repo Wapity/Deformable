@@ -48,7 +48,7 @@ class Trainer:
 
     def trainer():
         self._epoch += 1
-        for source, target in train_bar:
+        for source, target in data['train']:
             source, target = source.to(dev), target.to(dev)
             self.net_step()
         epoch_dir = self._dir + "/epoch_{}".format(self._epoch)
@@ -57,7 +57,21 @@ class Trainer:
         torch.save(self._model.state_dict(), ckp_dir)
 
     def net_eval():
-        pass
+        model.eval()
 
-    def evaluator():
-        pass
+        out, val_dgrads, val_theta = self._model(source, target)
+        val_loss = loss_func(out, target)
+        val_loss += alpha * \
+            torch.sum(torch.abs(val_theta - torch.eye(3, 4)))
+        + beta * torch.sum(torch.abs(val_dgrads -
+                                     torch.ones_like(val_dgrads)))
+        total_val_loss += val_loss.item()
+        total_val_loss /= len(data['test'])
+        print("Validation loss: {}".format(total_val_loss))
+
+
+def evaluator():
+    total_val_loss = 0
+    with torch.no_grad():
+        for source, target in data['val']:
+            self.net_eval()

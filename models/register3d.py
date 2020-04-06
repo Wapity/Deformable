@@ -2,8 +2,7 @@ import torch.nn as nn
 from layers import Transformer3d
 from .decoder import DefDecoder, LinDecoder
 from .encoder import Encoder
-from utils.utils import affine_grid_3d, gradient_grid_3d
-from utils.utils import build_affine_grid
+from utils.utils import affine_grid_3d, gradient_grid_3d, build_affine_grid
 
 
 class Register3d(nn.Module):
