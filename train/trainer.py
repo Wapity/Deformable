@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from autoencoder import *
+from models.autoencoder import *
 from models.register_3d import Register3d
 
 device = torch.device(
