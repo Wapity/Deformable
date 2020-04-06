@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 
-from encoder import Encoder
-from decoder import LinDecoder, DefDecoder
+from models.encoder import Encoder
+from models.decoder import LinDecoder, DefDecoder
 
 
 encoder = Encoder(2)

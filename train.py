@@ -1,8 +1,9 @@
 import torch
 import argparse
 
-from encoder import Encoder
-from decoder import Decoder, LinDecoder, DefDecoder
+from models.encoder import Encoder
+from models.decoder import Decoder, LinDecoder, DefDecoder
+
 device = torch.device(
     "cuda") if torch.cuda.is_available() else torch.device("cpu")
 

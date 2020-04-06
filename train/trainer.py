@@ -1,10 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from encoder import Encoder
-from decoder import LinDecoder, DefDecoder
-from sampling import sampler
-from register_3d import Register3d
+from models.encoder import Encoder
+from models.decoder import LinDecoder, DefDecoder
+from models.register_3d import Register3d
 
 device = torch.device(
     "cuda") if torch.cuda.is_available() else torch.device("cpu")
