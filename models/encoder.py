@@ -1,9 +1,10 @@
 import torch
 import torch.nn as nn
-import layers
+import .layers
 
 
 class Encoder(nn.Module):
+
     def __init__(self, in_channels):
         super(Encoder, self).__init__()
         self._dilated_1 = layers.Conv3D(in_channels, 32, 3, 1, dilation=1)

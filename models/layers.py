@@ -2,13 +2,16 @@ import torch.nn.functional as F
 import torch
 import torch.nn as nn
 
-activations = {'relu': nn.ReLU(),
-               'tanh': nn.Tanh(),
-               'leaky_relu': nn.LeakyReLU(negative_slope=0.01),
-               'sigmoid': nn.Sigmoid()}
+activations = {
+    'relu': nn.ReLU(),
+    'tanh': nn.Tanh(),
+    'leaky_relu': nn.LeakyReLU(negative_slope=0.01),
+    'sigmoid': nn.Sigmoid()
+}
 
 
 class Conv3D(nn.Module):
+
     def __init__(self,
                  in_channels,
                  out_channels,
@@ -19,11 +22,10 @@ class Conv3D(nn.Module):
                  instance_norm=True,
                  act='leaky_relu'):
         super(Conv3D, self).__init__()
-        self._layer = nn.Conv3d(in_channels, out_channels,
-                                kernel_size, stride, padding, dilation)
+        self._layer = nn.Conv3d(in_channels, out_channels, kernel_size, stride,
+                                padding, dilation)
         if instance_norm:
-            self._norm = nn.InstanceNorm3d(
-                in_channels, eps=1e-05, momentum=0.1)
+            self._norm = nn.InstanceNorm3d(in_channels, eps=1e-05, momentum=0.1)
         else:
             self._norm = nn.Identity()
         self._act = activations[act]
@@ -38,10 +40,8 @@ class Conv3D(nn.Module):
 
 
 class ChannelSELayer3D(nn.Module):
+
     def __init__(self, in_channels, reduction_ratio=2):
-        """
-        :param reduction_ratio: By how much should the in_channels should be reduced
-        """
         super(ChannelSELayer3D, self).__init__()
         self._avg_pool = nn.AdaptiveAvgPool3d(1)
         in_channels_reduced = in_channels // reduction_ratio
@@ -64,13 +64,14 @@ class ChannelSELayer3D(nn.Module):
             self._fc1(squeeze_tensor.view(batch_size, in_channels)))
         fc_out_2 = self._sigmoid(self._fc2(fc_out_1))
 
-        output_tensor = torch.mul(x, fc_out_2.view(
-            batch_size, in_channels, 1, 1, 1))
+        output_tensor = torch.mul(
+            x, fc_out_2.view(batch_size, in_channels, 1, 1, 1))
 
         return output_tensor
 
 
 class Transformer3d(nn.Module):
+
     def __init__(self):
         super(Transformer3d, self).__init__()
 

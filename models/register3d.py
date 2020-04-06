@@ -1,11 +1,12 @@
 import torch.nn as nn
-from layers import Transformer3d
+from .layers import Transformer3d
 from .decoder import DefDecoder, LinDecoder
 from .encoder import Encoder
 from utils.utils import affine_grid_3d, gradient_grid_3d, build_affine_grid
 
 
 class Register3d(nn.Module):
+
     def __init__(self, size, device, linear=True):
         super(Register3d, self).__init__()
         self.encoder = Encoder()
